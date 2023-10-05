@@ -9,12 +9,10 @@ import { HomeModule } from './modules/home/home.module';
   declarations: [
     AppComponent
   ],
-  exports:[
-    HomeModule
-  ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
