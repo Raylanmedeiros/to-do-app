@@ -12,8 +12,7 @@ export class TodoListComponent implements DoCheck {
 
   public taskList: Array<TaskList> = JSON.parse(localStorage.getItem("list") || '[]');
 
-  //Execute a sort of checked or non checked itens
-  //checked state are turned into number and number is sorted with sort() function
+
   ngDoCheck() {
     this.setLocalStorage();
   }
@@ -48,6 +47,9 @@ export class TodoListComponent implements DoCheck {
     }
   }
 
+  //Execute a sort of checked or non checked itens
+  //checked state are turned into number and number is sorted with sort() function
+  //Turn Array on String and save it on Local storage
   public setLocalStorage() {
     if (this.taskList) {
       this.taskList.sort((first, last) => Number(first.checked) - Number(last.checked));
