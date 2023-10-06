@@ -36,4 +36,14 @@ export class TodoListComponent implements DoCheck {
     }
   }
 
+  public validationInput(event: string, index: number) {
+    if (!event.length) {
+      const confirm = window.confirm("The field is empty. Want to remove?");
+
+      if (confirm) {
+        this.deleteItemTaskList(index);
+      }
+    }
+  }
+
 }
