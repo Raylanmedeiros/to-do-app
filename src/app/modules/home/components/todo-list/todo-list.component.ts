@@ -10,12 +10,13 @@ import { TaskList } from '../../model/task-list';
 })
 export class TodoListComponent implements DoCheck {
 
-  public taskList: Array<TaskList> = [];
+  public taskList: Array<TaskList> = JSON.parse(localStorage.getItem("list") || '[]');
 
+  //Execute a sort of checked or non checked itens
+  //checked state are turned into number and number is sorted with sort() function
   ngDoCheck() {
-    this.taskList.sort((first, last) => Number(first.checked) - Number(last.checked));
+    this.setLocalStorage();
   }
-
 
   //Add item to list
   public setEmitTaskList(event: string) {
@@ -36,6 +37,7 @@ export class TodoListComponent implements DoCheck {
     }
   }
 
+  //Validate if field is empty
   public validationInput(event: string, index: number) {
     if (!event.length) {
       const confirm = window.confirm("The field is empty. Want to remove?");
@@ -43,6 +45,13 @@ export class TodoListComponent implements DoCheck {
       if (confirm) {
         this.deleteItemTaskList(index);
       }
+    }
+  }
+
+  public setLocalStorage() {
+    if (this.taskList) {
+      this.taskList.sort((first, last) => Number(first.checked) - Number(last.checked));
+      localStorage.setItem("list", JSON.stringify(this.taskList));
     }
   }
 
