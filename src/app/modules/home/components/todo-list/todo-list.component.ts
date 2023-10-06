@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, numberAttribute, OnInit } from '@angular/core';
 
 //interface
 import { TaskList } from '../../model/task-list';
@@ -8,13 +8,18 @@ import { TaskList } from '../../model/task-list';
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.scss']
 })
-export class TodoListComponent {
+export class TodoListComponent implements DoCheck {
 
   public taskList: Array<TaskList> = [];
 
+  ngDoCheck() {
+    this.taskList.sort((first, last) => Number(first.checked) - Number(last.checked));
+  }
 
+
+  //Add item to list
   public setEmitTaskList(event: string) {
-    this.taskList.push({task: event, checked: false})
+    this.taskList.push({ task: event, checked: false })
   }
 
   //Single Delete
